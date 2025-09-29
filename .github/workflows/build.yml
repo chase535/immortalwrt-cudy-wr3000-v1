@@ -1,0 +1,46 @@
+name: build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Clone padavanonly/immortalwrt-mt798x-6.6
+        run: |
+          git clone https://github.com/padavanonly/immortalwrt-mt798x-6.6.git -b "openwrt-24.10-6.6" ./immortalwrt
+      - name: Update and install all package
+        run: |
+          cd ./immortalwrt
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+      - name: Copy .config file
+        run: |
+          cp -f ./.config ./immortalwrt/.config
+      - name: Make oldconfig
+        run: |
+          cd ./immortalwrt
+          make oldconfig
+      - name: Show .config
+        run: |
+          cat ./immortalwrt/.config
+      - name: Make download
+        run: |
+          cd ./immortalwrt
+          make download
+      - name: Build framework
+        run: |
+          cd ./immortalwrt
+          make -j$(nproc)
+      - name : Upload framework
+        uses: actions/upload-artifact@v4
+        with:
+          name: framework
+          path: ${{ github.workspace }}/immortalwrt/bin/*
