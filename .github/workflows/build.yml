@@ -33,9 +33,6 @@ jobs:
           cd ./immortalwrt
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-      - name: Copy .config file
-        run: |
-          cp -f ./.config ./immortalwrt/.config
       - name: Generate .config
         run: |
           cd ./immortalwrt
