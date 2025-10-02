@@ -39,7 +39,7 @@ jobs:
       - name: Make olddefconfig
         run: |
           cd ./immortalwrt
-          make olddefconfig
+          make olddefconfig V=s
       - name : Upload .config
         uses: actions/upload-artifact@v4
         with:
@@ -49,7 +49,7 @@ jobs:
       - name: Make download
         run: |
           cd ./immortalwrt
-          make download
+          make download V=s
       - name: Build framework
         run: |
           cd ./immortalwrt
