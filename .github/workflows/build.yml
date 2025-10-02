@@ -28,9 +28,11 @@ jobs:
         run: |
           cd ./immortalwrt
           make oldconfig
-      - name: Show .config
-        run: |
-          cat ./immortalwrt/.config
+      - name : Upload .config
+        uses: actions/upload-artifact@v4
+        with:
+          name: config
+          path: ${{ github.workspace }}/immortalwrt/.config
       - name: Make download
         run: |
           cd ./immortalwrt
