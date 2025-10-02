@@ -36,13 +36,13 @@ jobs:
       - name: Copy .config file
         run: |
           cp -f ./.config ./immortalwrt/.config
-      - name: Make olddefconfig
+      - name: Generate .config
         run: |
           cd ./immortalwrt
           cp -f ./defconfig/mt7981-ax3000.config ./.config
-          make olddefconfig V=s
+          make oldconfig V=s
           cp -f ../mt7981-cudy-wr3000-v1.config ./.config
-          make olddefconfig V=s
+          make oldconfig V=s
       - name : Upload .config
         uses: actions/upload-artifact@v4
         with:
