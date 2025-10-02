@@ -45,6 +45,7 @@ jobs:
         with:
           name: config
           path: ${{ github.workspace }}/immortalwrt/.config
+          include-hidden-files: true
       - name: Make download
         run: |
           cd ./immortalwrt
