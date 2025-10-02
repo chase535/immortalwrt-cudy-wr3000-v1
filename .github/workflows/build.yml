@@ -36,10 +36,10 @@ jobs:
       - name: Copy .config file
         run: |
           cp -f ./.config ./immortalwrt/.config
-      - name: Make oldconfig
+      - name: Make olddefconfig
         run: |
           cd ./immortalwrt
-          make oldconfig
+          make olddefconfig
       - name : Upload .config
         uses: actions/upload-artifact@v4
         with:
@@ -53,7 +53,7 @@ jobs:
       - name: Build framework
         run: |
           cd ./immortalwrt
-          make -j$(nproc)
+          make -j$(nproc) V=s
       - name : Upload framework
         uses: actions/upload-artifact@v4
         with:
