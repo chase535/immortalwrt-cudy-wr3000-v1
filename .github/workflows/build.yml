@@ -35,10 +35,8 @@ jobs:
           ./scripts/feeds install -a
       - name: Generate .config
         run: |
+          cp -f ./mt7981-cudy-wr3000-v1.config ./immortalwrt/.config
           cd ./immortalwrt
-          cp -f ./defconfig/mt7981-ax3000.config ./.config
-          make oldconfig V=s
-          cp -f ../mt7981-cudy-wr3000-v1.config ./.config
           make oldconfig V=s
       - name : Upload .config
         uses: actions/upload-artifact@v4
