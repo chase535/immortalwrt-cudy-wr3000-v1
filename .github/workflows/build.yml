@@ -37,7 +37,7 @@ jobs:
         run: |
           cp -f ./mt7981-cudy-wr3000-v1.config ./immortalwrt/.config
           cd ./immortalwrt
-          make oldconfig V=s
+          make oldconfig
       - name : Upload .config
         uses: actions/upload-artifact@v4
         with:
@@ -47,11 +47,11 @@ jobs:
       - name: Make download
         run: |
           cd ./immortalwrt
-          make download V=s
+          make download
       - name: Build framework
         run: |
           cd ./immortalwrt
-          make -j$(nproc) V=s
+          make -j$(nproc)
       - name : Upload framework
         uses: actions/upload-artifact@v4
         with:
