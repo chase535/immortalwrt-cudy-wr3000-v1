@@ -25,6 +25,10 @@ jobs:
             ninja-build p7zip p7zip-full patch pkgconf python3 python3-pip python3-ply python3-docutils \
             python3-pyelftools qemu-utils re2c rsync scons squashfs-tools subversion swig texinfo uglifyjs \
             upx-ucl unzip vim wget xmlto xxd zlib1g-dev zstd
+      - name: Set Timezone to Asia/Shanghai
+        run: |
+          sudo timedatectl set-timezone Asia/Shanghai
+          timedatectl
       - name: Clone padavanonly/immortalwrt-mt798x-6.6
         run: |
           git clone https://github.com/padavanonly/immortalwrt-mt798x-6.6.git -b "openwrt-24.10-6.6" ./immortalwrt
