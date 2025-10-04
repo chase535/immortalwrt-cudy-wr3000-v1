@@ -33,7 +33,7 @@ jobs:
           cd ./immortalwrt
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-      - name: Generate .config
+      - name: Make oldconfig
         run: |
           cp -f ./mt7981-cudy-wr3000-v1.config ./immortalwrt/.config
           cd ./immortalwrt
@@ -52,8 +52,10 @@ jobs:
         run: |
           cd ./immortalwrt
           make -j$(nproc)
-      - name : Upload framework
+      - name : Upload frameware
         uses: actions/upload-artifact@v4
         with:
-          name: framework
-          path: ${{ github.workspace }}/immortalwrt/bin/*
+          name: frameware
+          path: |
+            ${{ github.workspace }}/immortalwrt/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-cudy_wr3000-v1-initramfs-kernel.bin
+            ${{ github.workspace }}/immortalwrt/bin/targets/mediatek/filogic/immortalwrt-mediatek-filogic-cudy_wr3000-v1-squashfs-sysupgrade.bin
